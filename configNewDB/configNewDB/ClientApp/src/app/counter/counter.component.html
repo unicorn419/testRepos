@@ -1,0 +1,306 @@
+<h1>Configuration</h1>
+
+<p *ngIf="!ConfigurationModelData"><em>Loading...</em></p>
+<p *ngIf="!CurrentService"><em>Loading...</em></p>
+
+<table>
+  <tr>
+    <td>
+      <label>Step 1: Choose File Type :</label>
+    </td>
+
+    <td>
+
+      <select id="selectFileExtension" [(ngModel)]="ConfigurationModelData['fileExtension']" (change)="GetTemplate()" class='form-control'>
+        <option *ngFor="let f of fileExtension" value="{{f}}">{{f}}</option>
+      </select>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <label>Step 2: Choose File Encoding:</label>
+    </td>
+
+    <td>
+      <select [(ngModel)]="ConfigurationModelData['fileEncoding']" class='form-control'>
+        <option *ngFor="let f of fileEncoding" value="{{f}}">{{f}}</option>
+      </select>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <label>Step 3: Choose One Parser :</label>
+    </td>
+
+    <td>
+      <select [(ngModel)]="ConfigurationModelData['parserClassName']" class='form-control'>
+        <option value='FileProcess.XIFFileParser'>XML Parser</option>
+        <option value='FileProcess.UIFFileParser'>Uif Parser</option>
+        <option value='FileProcess.TXTFileParser'>TXT Parser</option>
+        <option value='FileProcess.CSVFileParser'>CSV Parser</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label>Option: Upload one xml/uif sample file to analysis:</label>
+    </td>
+
+    <td>
+      <input #file type="file" multiple (change)="upload(file.files)" accept="{{ConfigurationModelData['fileExtension']}}" />
+      <br />
+      <span style="font-weight:bold;color:green;" *ngIf="progress > 0 && progress < 100">
+        {{progress}}%
+      </span>
+
+      <span style="font-weight:bold;color:green;" *ngIf="message">
+        {{message}}
+      </span>
+    </td>
+  </tr>
+  <p></p>
+  <tr>
+    <td>IsEnabled:</td>
+    <td> <input type="checkbox" [(ngModel)]="ConfigurationModelData['isEnabled']"> Enabled <br> </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td align="right"> <p><button (click)="Submit()">Submit</button></p></td>
+  </tr>
+
+</table>
+
+<HR style="border:1 dashed #987cb9" width="100%" color=#987cb9 SIZE=1>
+
+<table >
+  <tr>
+    <td valign="top" width="25%">
+      <div>
+        <ng-container *ngFor="let rootService of ConfigurationModelData['services'];let i=index">
+          <p>
+            <a href="javascript:void(0)" (click)="DisplayService(i,-1)"> {{rootService.name}}  </a>
+            <li *ngFor="let subService of rootService['services'];let j=index">
+              <a href="javascript:void(0)" (click)="DisplayService(i,j)">
+                {{subService.name}}
+              </a>
+            </li>
+          </p>
+        </ng-container>
+
+       
+      </div>
+
+
+    </td>
+    <td width="1%">
+      <table border="1" cellpadding="0" cellspacing="0" style="height:auto;border-left-style:solid; border-bottom-style:none;border-right-style:none;border-top-style:none"></table>
+    </td>
+    <td >
+      <div>
+        <p *ngIf="IsRootService">
+          Add new defination 
+          <select [(ngModel)]="CurrentSubServiceSelected">
+            <option *ngFor="let source of SubService" value="{{source.name}}">{{source.name}} </option>
+          </select>
+          to  [{{CurrentService.name}}]
+          <a href="javascript:void(0)" (click)="AddSubService()">Add</a>
+        </p>
+
+        <p *ngIf="!IsRootService">
+          <a href="javascript:void(0)" (click)="RemoveSubService()">Remove current {{CurrentService.name}} from [{{ConfigurationModelData["services"][RootServiceIndex]["name"]}}]</a>
+        </p>
+
+        <p></p>
+
+      </div>
+
+      <HR style="border:1 dashed #987cb9" width="100%" color=#987cb9 SIZE=1>
+      <div>
+        <p>Select [{{CurrentService.name}}] Source:</p>
+        <select [(ngModel)]="CurrentService.source" style="width:100%">
+          <ng-container *ngFor="let source of XMLConfigData">
+            <option *ngIf="source.isList" value="{{source.xPath}}">{{source.xPath}} </option>
+          </ng-container>
+        </select>
+        <p>Or input manualy:</p>
+        <input [(ngModel)]="CurrentService.source" style="width:100%" />
+
+      </div>
+      <br />
+      <HR style="border:1 dashed #987cb9" width="100%" color=#987cb9 SIZE=1>
+      <table border="1" width="100%">
+        <tr>
+          <td>Name</td>
+          <td>Source</td>
+          <td>Default</td>
+          <td>IsNeedProcess</td>
+          <td>JScript</td>
+          <td>Convert</td>
+          <td>Operate</td>
+        </tr>
+
+        <tr *ngFor="let item of CurrentService['configItems']">
+          <td *ngIf="item.isUpdated">{{item.name}}</td>
+          <td *ngIf="item.isUpdated">{{item.source}}</td>
+          <td *ngIf="item.isUpdated">{{item.default}}</td>
+          <td *ngIf="item.isUpdated">{{item.isNeedProcess}}</td>
+          <td *ngIf="item.isUpdated">{{item.isNeedProcess=="true"?"****":""}}</td>
+          <td *ngIf="item.isUpdated">{{item.convertFunc}}</td>
+          <td *ngIf="item.isUpdated"><a *ngIf="!item.isFixed" href="javascript:void(0)" (click)="DisplayItems(item.name)">Edit</a>  /  <a *ngIf="!item.isFixed" href="javascript:void(0)" (click)="RemoveConfigItem(item.name)">Remove</a></td>
+        </tr>
+
+
+
+      </table>
+
+      <br />
+
+
+
+      <br />
+
+
+      <table>
+        <tr>
+          <td>Name:</td>
+          <td>
+            <select [ngModel]="CurrentItem['name']" (change)="DisplayItems($event.target.value)">
+              <ng-container *ngFor="let item of CurrentService['configItems']">
+                <option *ngIf="!item.isFixed" value="{{item.name}}">{{item.name + " " + (item.isUpdated?"*" :" ")}} </option>
+              </ng-container>
+            </select>
+            <a *ngIf="!CurrentItem['isUpdated']" href="javascript:void(0)" (click)="AddConfigItem()">Add</a>
+
+
+          </td>
+
+        </tr>
+
+        <tr>
+          <td>Value:</td>
+          <td>
+            <p>
+              <select [(ngModel)]="CurrentItem.source" style="width:100%">
+                <ng-container *ngFor="let source of XMLConfigData">
+                  <option *ngIf="source.isValue" value="{{source.xPath}}">{{source.xPath}}</option>
+                </ng-container>
+              </select>
+            </p>
+            <p>Or input manualy </p>
+            <input [(ngModel)]="CurrentItem.source" style="width:100%" />
+          </td>
+        </tr>
+
+        
+
+        <tr>
+          <td>Default:</td>
+          <td><input [(ngModel)]="CurrentItem.default" /></td>
+        </tr>
+        <br />
+
+        <tr>
+          <td>ConvertFunction:</td>
+          <td>
+            <select [(ngModel)]="CurrentConvertFunc" (change)="ConvertFuncChange()">
+              <option *ngFor="let source of convertFunc" value="{{source}}">{{source}}</option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Convert Paramater:</td>
+          <td><input value="" [(ngModel)]="CurrentConvertParamater" (change)="ConvertFuncChange()" style="width:100%" /></td>
+        </tr>
+
+
+
+
+
+        <tr>
+          <td>IsNeedProcess:</td>
+          <td>
+            <select [(ngModel)]="CurrentItem.isNeedProcess">
+              <option *ngFor="let source of trueFalseOptions" value="{{source}}">{{source}}</option>
+            </select>
+          </td>
+        </tr>
+
+
+        <tr>
+          <td>JavaScript:</td>
+          <td>
+            <textarea style="width:100%" [(ngModel)]="CurrentItem.javaScript" rows="8">
+              
+            </textarea>
+          </td>
+        </tr>
+
+
+        <tr>
+          <td valign="top">convert function sample</td>
+          <td>
+            <li>
+              StringReplace; :
+              <p>Paramater is ' :' , it means replace space</p>
+            </li>
+            <li>
+
+              DateFormat;yyyy-MM-dd,yyyy-MM-ddT00:00:01Z
+              <p>
+                Paramater is 'yyyy-MM-dd,yyyy-MM-ddT00:00:01Z',
+                it means format '2019-01-01' to '2019-01-01T00:00:01Z'
+              </p>
+            </li>
+            <li>
+              StringCompare;R|R1|R2?Loan or Retail:Lease
+              <p>
+                Paramater is 'R|R1|R2?Loan or Retail:Lease' ,it means if value is 'R' or 'R1' or 'R2',
+                then replace with 'Loan or Retail' ,otherwise replace with 'Lease'
+              </p>
+            </li>
+            <li>
+              MonthToYear;
+              <p>
+                No Paramater,convert current month value to year, for example:13 is 2.
+              </p>
+            </li>
+            <li>
+              YearToMonth;
+              <p>
+                No Paramater,convert current year value to month, for example:2 is 24.
+              </p>
+            </li>
+            <li>
+              Today;
+              <p>
+                No Paramater,get current day, format is yyyy-MM-dd.
+              </p>
+            </li>
+
+            <li>
+              Now;
+              <p>
+                No Paramater,get current time, format is yyyy-MM-dd HH:mm:ss.
+              </p>
+            </li>
+          </td>
+
+        </tr>
+        <br />
+
+
+      </table>
+
+
+      <br />
+      <br />
+    </td>
+
+  </tr>
+    
+</table>
+
+

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="Configurations">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="FileProcessFlow"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FileProcessFlow">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Processor"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Processor">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="Transaction"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Transaction">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="Entity"/>
+      </xs:sequence>
+      <xs:attribute name="databaseTransaction" use="required" type="xs:boolean"/>
+      <xs:attribute name="serviceType" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Entity">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="item"/>
+      </xs:sequence>
+      <xs:attribute name="className" use="required"/>
+      <xs:attribute name="classPath" use="required" type="xs:NCName"/>
+      <xs:attribute name="index" use="required" type="xs:integer"/>
+      <xs:attribute name="isAvoidRepetition" use="required" type="xs:boolean"/>
+      <xs:attribute name="name" use="required" type="xs:NCName"/>
+      <xs:attribute name="operate" use="required" type="xs:NCName"/>
+      <xs:attribute name="sourceList" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="item">
+    <xs:complexType>
+      <xs:attribute name="destAttName" use="required" type="xs:NCName"/>
+      <xs:attribute name="refObject" type="xs:NCName"/>
+      <xs:attribute name="sourceAttName" use="required"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

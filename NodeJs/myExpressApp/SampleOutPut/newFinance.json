@@ -1,0 +1,26 @@
+{
+    "data": {
+      "orderId": 0,
+      "importOrderStatus": "NotImported",
+      "errors": [
+        {
+          "code": "string",
+          "description": "string"
+        }
+      ],
+      "registryMessages": [
+        {
+          "messageText": "string",
+          "transactionId": 0,
+          "languageCode": "string",
+          "messageTypeCode": "string"
+        }
+      ],
+      "transactions": [
+        {
+          "transactionId": 0,
+          "jurisdictionCode": "string"
+        }
+      ]
+    }
+  }

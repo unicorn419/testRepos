@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Configurations>
+  <FileProcessFlow>
+    <Parser>
+      <ServiceRow serviceType="New" source="" >
+        <item name="BatchNumber" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="BatchDate" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="AccountNumber" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="PPRProvince" source="" default="" isNeedProcess="false" >
+        </item>
+        <item name="ContractStartDate" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="ServiceTypeId" source="" default="1" isNeedProcess="false" >
+        </item>
+        <item name="TermUnit" source="" default="" isNeedProcess="false"></item>
+        <item name="LoanAmount" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="ExpiryDate" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="MaturityDate" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="RegistrationContractParentId" source="" default="0" isNeedProcess="false">
+        </item>
+        <item name="ContractCity" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="ContractProvince" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="LVSCode" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="LkpProcessStatus" source="" default="0" isNeedProcess="false" >
+        </item>
+        <item name="RegistrationNumber" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="EFProvinceMismatch" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="PreviousAccountNumber" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="IsCurrentData" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="DateInserted" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="DescriptionOfChange" source="" default="" isNeedProcess="false">
+        </item>
+        
+        <ServiceRow serviceType="SecuredParty" source="" >
+          <item name="Code" source="Transit" default="" isNeedProcess="false">
+          </item>
+          <item name="Name" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="Street" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="City" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="Province" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="PostalCode" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="DateInserted" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="IsCurrentData" source="" default="1" isNeedProcess="false">
+          </item>
+        </ServiceRow>
+
+        <ServiceRow serviceType="RegistrationDebtorParty" source="" desc="Individual Registration Debtor" >
+          <item name="FirstName" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="MiddleName" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="LastName" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="DateOfBirth" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="Street" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="City" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="Province" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="ParentId" source="" default="0" isNeedProcess="false">
+          </item>
+          <item name="ClientReferenceId" source="" default="0" isNeedProcess="false">
+          </item>
+          <item name="PreviousClientReferenceId" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="AKADebtorParty" source="" default="0" isNeedProcess="false">
+          </item>
+          <item name="IsCurrentData" source="" default="1" isNeedProcess="false">
+          </item>
+          <item name="DateInserted" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="PostalCode" source="" default="" isNeedProcess="true">
+            <script>
+              var postalCode=root.GetItem("PostalCode");
+              root.SetItem("PostalCode",postalCode.replace(' ',''));
+            </script>
+          </item>
+          <item name="DebtorSequence" source="" default="" isNeedProcess="false"></item>
+          <item name="PartyType" source="" default="" isNeedProcess="true">
+            <script>
+              if(root.GetItem("DebtorSequence")=='1') { root.SetItem("PartyType","1");}
+              else{ root.SetItem("PartyType","2"); }
+            </script>
+          </item>
+          <item name="DebtorType" source="" default="I" isNeedProcess="false"></item>
+          <item name="FullName" source="" default="" isNeedProcess="true">
+            <script>
+              var fullName = root.GetItem("FirstName") + " " + root.GetItem("MiddleName") + " " + root.GetItem("LastName");
+              root.SetItem("FullName",fullName);
+            </script>
+          </item>
+          <item name="NotifyLanguage" source="" default="" isNeedProcess="true">
+            <script>
+              if(root.GetItem("Provice")=='QC') {root.SetItem("NotifyLanguage","French");}
+              else {root.SetItem("NotifyLanguage","English");}
+            </script>
+          </item>
+        </ServiceRow>
+
+        <ServiceRow serviceType="RegistrationDebtorParty" source="" desc="Business Registration Debtor" >
+          <item name="FirstName" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="MiddleName" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="LastName" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="DateOfBirth" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="Street" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="City" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="Province" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="DebtorSequence" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="DebtorType" source="" default="B" isNeedProcess="false">
+          </item>
+          <item name="FullName" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="ParentId" source="" default="0" isNeedProcess="false">
+          </item>
+          <item name="ClientReferenceId" source="" default="0" isNeedProcess="false">
+          </item>
+          <item name="PreviousClientReferenceId" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="AKADebtorParty" source="" default="0" isNeedProcess="false">
+          </item>
+          <item name="IsCurrentData" source="" default="1" isNeedProcess="false">
+          </item>
+          <item name="DateInserted" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="PostalCode" source="" default="" isNeedProcess="true">
+            <script>
+              var postalCode=root.GetItem("PostalCode");
+              root.SetItem("PostalCode",postalCode.replace(' ',''));
+            </script>
+          </item>
+          <item name="NotifyLanguage" source="" default="" isNeedProcess="true">
+            <script>
+              if(root.GetItem("Provice")=='QC') {root.SetItem("NotifyLanguage","French");}
+              else {root.SetItem("NotifyLanguage","English");}
+            </script>
+          </item>
+          <item name="PartyType" source="" default="" isNeedProcess="true">
+            <script>
+              if(root.GetItem("DebtorSequence")=='1') { root.SetItem("PartyType","1");}
+              else{ root.SetItem("PartyType","2"); }
+            </script>
+          </item>
+        </ServiceRow>
+
+        <item name="BillingParty" source="" default="" isNeedProcess="false">
+        </item>
+
+        <ServiceRow serviceType="RegistrationSerialCollateral" source="" >
+          <item name="CGESerialCollateralTypeName" source="" default="" isNeedProcess="false" >
+          </item>
+          <item name="SerialNumber" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="Make" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="Model" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="Year" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="SyncId" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="IsCurrentData" source="" default="1" isNeedProcess="false">
+          </item>
+          <item name="DateInserted" source="" default="" isNeedProcess="false">
+          </item>
+          <item name="PreviousSerialNumber" source="" default="" isNeedProcess="false">
+          </item>
+        </ServiceRow>
+      </ServiceRow>
+
+      <ServiceRow serviceType="Renew" source="">
+      </ServiceRow>
+
+      <ServiceRow serviceType="Discharge" source="//Xif-Document/Registration-List/Discharge-Registration">
+        <item name="ContractStartDate" source="" default="T00:00:01Z" isNeedProcess="false">
+        </item>
+        <item name="BatchNumber" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="AccountNumber" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="RegistrationNumber" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="PPRProvince" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="Transit" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="ServiceTypeId" source="" default="2" isNeedProcess="false" >
+        </item>
+        <item name="LVSCode" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="RegistrationContractParentId" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="ContractCity" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="ContractProvince" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="TermUnit" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="ExpiryDate" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="MaturityDate" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="LoanAmount" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="RecordStatusId" source="" default="0" isNeedProcess="false">
+        </item>
+        <item name="EFProvinceMismatch" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="PreviousAccountNumber" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="IsCurrentData" source="" default="1" isNeedProcess="false">
+        </item>
+        <item name="DateInserted" source="" default="" isNeedProcess="false">
+        </item>
+        <item name="DescriptionOfChange" source="" default="" isNeedProcess="false">
+        </item>
+      </ServiceRow>
+
+      <ServiceRow serviceType="amendment" source="">
+      </ServiceRow>
+
+      <ServiceRow serviceType="expire" source="">
+      </ServiceRow>
+    </Parser>
+  </FileProcessFlow>
+</Configurations>
