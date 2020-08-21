@@ -157,6 +157,18 @@ void MySort::bucketSort(float * arr, int n)
 	delete[] b;
 }
 
+/*void MySort::mapSortByValue(map<int, int>& m)
+{
+	vector<pair<int, int>> vec;
+	copy(m.begin(), m.end(), back_inserter<vector<pair<int, int>>>(vec));
+	sort(vec.begin(), vec.end(), [](const pair<int, int>&l, const pair<int, int>&r) {
+		if (l.second != r.second)
+			return l.second < r.second;
+		return l.first < r.first;
+	});
+	
+}*/
+
 int MySort::getMax(int *arr, int n)
 {
 	int mx = arr[0];

@@ -93,7 +93,17 @@ vector<vector<int>> DataCenterConnect::findIsolatedComponent(int count, map<int,
 
 int DataCenterConnect::find(int x,int* set)
 {
-	return x == set[x] ? x : (set[x] = find(set[x],set));   //递归查找集合的代表元素，含路径压缩。
+	/* 循环算法，缺点无法进行路径压缩
+	int tmp=x;
+	while(tmp!=set[tmp])
+	{
+	    tmp=set[tmp];
+		//set[tmp]=
+	}
+	//set[x]=tmp;
+	return tmp;
+	*/
+	return x == set[x] ? x : (set[x] = find(set[x],set));   //递归查找集合的代表元素，含路径压缩。但可能会导致栈溢出
 }
 
 vector<vector<int>> DataCenterConnect::FindKeyPath(int count, vector<vector<int>> &conns)

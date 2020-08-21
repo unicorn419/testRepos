@@ -156,6 +156,7 @@
     <ClInclude Include="DPAlgo.h" />
     <ClInclude Include="FindSubStrings.h" />
     <ClInclude Include="MySort.h" />
+    <ClInclude Include="StockSpanner.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="TireTree.h" />
     <ClInclude Include="Tree.h" />
@@ -167,6 +168,7 @@
     <ClCompile Include="DPAlgo.cpp" />
     <ClCompile Include="FindSubStrings.cpp" />
     <ClCompile Include="MySort.cpp" />
+    <ClCompile Include="StockSpanner.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

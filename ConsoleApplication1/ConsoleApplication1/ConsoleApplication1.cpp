@@ -17,6 +17,8 @@
 #include "DataCenterConnect.h"
 #include"Tree.h"
 #include "TireTree.h"
+#include "DPAlgo.h"
+#include "StockSpanner.h"
 
 using namespace std;
 class Solution {
@@ -561,7 +563,28 @@ int main()
 	 dataRes= datacenter.FindLowCostKeyPath(6, dateCentervector, costs);
 	 bool isConnected =datacenter.MergeSearch(6, dateCentervector);
 
+	 DPAlgo dpalgo;
+	 vector<int> coins = { 1,2,5 };
+	 int resMoney = dpalgo.minCoins(18, coins);
+	 int index = 2;
+	 int totolMoney = dpalgo.changeCoins(5, coins,index);
+	 
+	 map<string, int> map1;
+	 string s11("aaa");
+	 string s12("aaa");
+	 map1[s11]++;
+	 map1[s12]++;
 
+	 vector<string> vFeatures= dpalgo.popularNFeatures(5, 2,{"ab","bc","cd","de","ef"}, 3, {"AB ab cd!","ab de,ef.","ab cd de"});
+
+	 StockSpanner stock;
+	 stock.next(100);
+	 stock.next(80);
+	 stock.next(60);
+	 stock.next(70);
+	 stock.next(60);
+	 stock.next(75);
+	 stock.next(85);
 
 	return 0;
 

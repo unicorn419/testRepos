@@ -1,9 +1,10 @@
-#pragma once
+﻿#pragma once
 #include <string>
 #include <set>
 
 using namespace std;
 
+/*前缀树，一般用来计算海量词汇的共同前缀和联想输入*/
 struct TireTree
 {
 public:
@@ -30,6 +31,7 @@ public:
 
 		}
 	}
+	//在树中找到该词的最后一个节点
 	TireTree * searchNode(string s)
 	{
 		TireTree * tmp = this;
@@ -42,6 +44,7 @@ public:
 		}
 		return tmp;
 	}
+	//返回当前词汇的后续可能词汇
 	void getLeftPossibleString(string current, int count, TireTree *node, set<string> & left)
 	{
 		bool isend = false;
@@ -64,6 +67,7 @@ public:
 			if (left.find(current) == left.end()) left.insert(current);
 		}
 	}
+	//判断该词是否为某词的前缀，复杂度O(n)
 	bool search(string s)
 	{
 		TireTree * tmp = this;

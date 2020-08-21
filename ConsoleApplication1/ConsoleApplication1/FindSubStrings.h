@@ -1,7 +1,10 @@
-#pragma once
+﻿#pragma once
 #include <vector>
 #include <string>
 using namespace std;
+/*
+找词的不重复子串
+*/
 class FindSubStrings
 {
 public:
