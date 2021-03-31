@@ -11,5 +11,6 @@ public:
 	FindSubStrings();
 	~FindSubStrings();
 	vector<string> Find(string s);
+	bool FindRepeatSubString(string s);
 };
 

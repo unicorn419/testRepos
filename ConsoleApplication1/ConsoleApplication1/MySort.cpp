@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "MySort.h"
 #include <algorithm>
 #include <vector>
@@ -91,16 +91,16 @@ void MySort::merge(int * arr, int l, int m, int r)
 
 int  MySort::partition(int * arr, int low, int high)
 {
-	int pivot = arr[high]; // pivot  
-	int i = (low - 1); // Index of smaller element  
+	int pivot = arr[high]; // pivot  取最后一个数字作为基准
+	int i = (low - 1); // Index of smaller element 取最低一位前一位  
 
 	for (int j = low; j <= high - 1; j++)
 	{
-		// If current element is smaller than the pivot  
+		// If current element is smaller than the pivot 如果 
 		if (arr[j] < pivot)
 		{
-			i++; // increment index of smaller element  
-			swap(&arr[i], &arr[j]);
+			i++; // increment index of smaller element  移动替换位置坐标+1
+			swap(&arr[i], &arr[j]);//交换当前值和替换位置
 		}
 	}
 	swap(&arr[i + 1], &arr[high]);
@@ -114,11 +114,24 @@ void MySort::quickSort(int * arr, int low, int high)
 		/* pi is partitioning index, arr[p] is now
 		at right place */
 		int pi = partition(arr, low, high);
-
+		for (int i = 0;i <= 9;++i)
+			printf("%d ", arr[i]);
+		printf("/n");
 		// Separately sort elements before  
 		// partition and after partition  
 		quickSort(arr, low, pi - 1);
 		quickSort(arr, pi + 1, high);
+	}
+}
+
+void MySort::insertion_sort(vector<int> v)
+{
+	for (int i = 1; i < v.size(); ++i) {
+		int tmp = v[i], j = i - 1;
+		for (; j >= 0 && v[j] > tmp; --j) {
+			v[j + 1] = v[j];
+		}
+		v[j + 1] = tmp;
 	}
 }
 

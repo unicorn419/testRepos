@@ -33,5 +33,8 @@ private:
 	vector<vector<int>> findIsolatedComponent(int count, map<int, set<int>> &m);
 	//递归查找集合的代表元素，含路径压缩。但可能会导致栈溢出。我实现了两种算法
 	int find(int x,int * set);
+
+	//找数组间隔 右联通的下标
+	vector<int> findRightInterval(vector<vector<int>>& intervals);
 };
 

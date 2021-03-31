@@ -454,9 +454,17 @@ class FirstUnique {
 
 };
 
-
+bool compare(int const &i1, int const &i2)
+{
+	return i1<i2;
+}
 int main()
 {
+	MySort mysort;
+	int * arr= new int[10] {9,10,4,2,1,5,15,8,7,3};
+	mysort.quickSort(arr, 0, 9);
+	
+
 	Solution s;
 	vector<int> vec{ 4,2,1,2,1 };
 	vector<int> maxSubVec{ -2,1,-3,4,-1,2,1,-5,4 };
@@ -472,6 +480,18 @@ int main()
 	vector<char> v4{ '0', '0', '0', '0', '0' };
 	vectroNums.push_back(v4);
 
+	vector<int>::iterator  atr = std::lower_bound(vec.begin()+2, vec.begin()+4, 1);
+	if (atr == vec.end())
+	{
+		int adf = 123;
+	}
+	else
+	{
+		int adf;
+		adf= atr - vec.begin();
+		int aaaaaa = 12;
+	}
+	
 	/*vector<int> vectorsubarray{ 0,0,0,0,0,0,0,0,0,0};
 	LRUCache lCache(2);
 	lCache.put(1, 1);
@@ -535,11 +555,11 @@ int main()
 		//std::cout << "value:" << st.c_str<<endl;
 	}
 
-	MySort mysort;
+//	MySort mysort;
 
-	float arr[] = { 0.897, 0.565, 0.656, 0.1234, 0.665, 0.3434 };
-	int n = sizeof(arr) / sizeof(arr[0]);
-	mysort.bucketSort(arr, n);
+//	float arr[] = { 0.897, 0.565, 0.656, 0.1234, 0.665, 0.3434 };
+//	int n = sizeof(arr) / sizeof(arr[0]);
+	//mysort.bucketSort(&arr, n);
 
 	
 

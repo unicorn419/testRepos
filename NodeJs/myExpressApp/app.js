@@ -13,6 +13,8 @@ var app = express();
 var usersFilePath = path.join(__dirname, 'SampleOutPut', 'newFinance.json');
 
 app.get('/api/v2.0/orders/newfinance', (req, res) => {
+ 
+  
   var readable = fs.createReadStream(usersFilePath);
     readable.pipe(res);
 })
@@ -38,7 +40,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//app.use('/', indexRouter);
+app.use('/', indexRouter);
 //app.use('/api/v2.0/orders/newfinance',usersRouter);
 
 // catch 404 and forward to error handler

@@ -52,3 +52,29 @@ vector<string> FindSubStrings::Find(string S)
 	}
 	return res;
 }
+
+bool FindSubStrings::FindRepeatSubString(string s)
+{
+	map<char, vector<int>> m;
+	//set<char> s;
+
+	for (int i = 0;i < s.length();i++)
+	{
+		m[s.at(i)].push_back(i);
+	}
+	string tmp("");
+
+	for (auto iter = m.begin();iter != m.end();iter++)
+	{
+		if (iter->second.size() == 1)
+		{
+			//it is not the start charactor
+			continue;
+		}
+		else
+		{
+			
+		}
+	}
+	return 0;
+}

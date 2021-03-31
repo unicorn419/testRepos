@@ -106,6 +106,13 @@ int DataCenterConnect::find(int x,int* set)
 	return x == set[x] ? x : (set[x] = find(set[x],set));   //递归查找集合的代表元素，含路径压缩。但可能会导致栈溢出
 }
 
+vector<int> DataCenterConnect::findRightInterval(vector<vector<int>>& intervals)
+{
+	vector<int> res;
+	
+	return res;
+}
+
 vector<vector<int>> DataCenterConnect::FindKeyPath(int count, vector<vector<int>> &conns)
 {
 	vector<vector<int>> res;
